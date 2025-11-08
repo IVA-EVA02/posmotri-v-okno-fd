@@ -5,15 +5,18 @@
 }
 
 html {
-  block-size: 100%;
+  block-size: 100%; /*Задаём логическое свойство "размер по блоку" вместо высоты height.*/
 }
 
 .page {
-  inline-size: 1200px;
+  inline-size: 1200px; /*Задаём логическое свойство "размер по строке" вместо ширины width.*/
   block-size: 100%;
+  display: flex; /*Создаём лейаут на странице.*/
+  justify-content: center; /*Выравниваем блок .content по центру горизонтали.*/
+  align-items: center; /*Выравниваем блок .content по центру вертикали.*/
   margin: auto;
   color: #fff;
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: "Fira Sans Condensed", sans-serif;
   font-size: 18px;
   background-color: #1b1919;
 }
@@ -47,5 +50,331 @@ ol {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
+}
+
+/*Основной контент сайта*/
+
+.content {
+  display: flex; /*Создаём лейаут на странице.*/
+  align-items: end; /*Прижимаем элементы к низу .content по вертикали.*/
+  width: 1140px; /*Задаём ширину согласно макету.*/
+  /*height: 534px; Задаём высоту согласно макету.*/
+  gap: 30px; /*Задаём отступ между элементами согласно макету.*/
+}
+
+/*Общие стили кнопок*/
+
+.button {
+  font-family: "Fira Sans Condensed", sans-serif; /*Задаём стили (не наследуются) согласно макету.*/
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
+  min-height: 34px; /*Обязательно задаём min на высоту иначе кнопка не влезает в контейнер со скроллом.*/
+}
+
+.button:hover {
+  /*Задаём подчеркивание текста кнопки при наведении согласно макету.*/
+  text-decoration: underline solid #fff 0;
+  text-underline-offset: 2.8px;
+  text-decoration-skip-ink: none; /*Рисуем линию под текстом сквозь глифы.*/
+}
+
+.button:active {
+  /*Задаём стиль кнопке в нажатом состоянии согласно макету.*/
+  background-color: #545050;
+}
+
+.button:focus {
+  /*Сбрасываем фокус у кнопки при нажатии мышью.*/
+  outline: none;
+}
+
+.button:focus-visible {
+  /*Задаём фокус у кнопки при нажатии Tab.*/
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+/*Секция result*/
+
+.result__video-container {
+  position: relative; /*Спозиционировали элемент относительно, чтобы абсолютно спозиционированные прелоадеры встали в них.*/
+  height: 386px; /*Задаём высоту согласно макету.*/
+  width: 711px; /*Задаём ширину согласно макету.*/
+  margin-bottom: 16px; /*Задаём внешний нижний отступ согласно макету.*/
+  cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
+}
+
+.result__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /*Задаём для красивой адаптации видео под размеры любого экрана.*/
+}
+
+.visually-hidden {
+  position: absolute; /*Добавляем паттерн (класс с набором подобранных стилей) для скрытия*/
+  inline-size: 1px; /* лишних лейблов и браузерных чекбоксов, чтобы потом нарисовать поверх них свои.*/
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.search-form {
+  display: flex; /*Создаём лейаут в форме.*/
+  justify-content: space-between; /*Распределили между элементами свободное пространство.*/
+  align-items: start; /*Прижимаем элементы к верхней части формы по вертикали.*/
+  height: 54px; /*Задаём высоту согласно макету.*/
+}
+
+.search-form__fieldset {
+  border-style: none; /*Cбрасываем рамки у наборов полей.*/
+  width: fit-content; /*Позволяем обёртке принять размер содержимого, не растягивая её на всю доступную ширину.*/
+}
+
+.search-form__fieldset-title {
+  font-weight: 400; /*Задаём стили текста в соответствии с макетом.*/
+  font-size: 18px;
+  line-height: 1.2; /*Подгоняем согласно макету с инпользованием PerfectPixel.*/
+  letter-spacing: 0;
+  margin-bottom: 5px; /*Задаём отступ между названием поля и инпутом согласно макету.*/
+  width: 100%;
+  height: 22px; /*Задаём высоту согласно макету.*/
+}
+
+.search-form__label {
+  display: flex; /*Размещаем элементы каждого поля поиска (например, чекбокс+подпись) в строку.*/
+  gap: 5px; /*Добавляем отступ между чекбоксом и его подписью.*/
+  align-items: center;
+  width: fit-content; /*Позволяем обёртке принять размер содержимого, не растягивая её на всю доступную ширину.*/
+  height: fit-content; /*Исправлено для отображения обводки по макету. Было 27px.*/
+  cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
+}
+
+.search-form__textfield:focus {
+  outline: none; /*Сбрасываем обводку у элемента инпут.*/
+}
+
+.search-form__textfield:focus-visible {
+  outline: none; /*Сбрасываем обводку у элемента инпут.*/
+}
+
+/*Текстовое поле (инпут) всегда будет получать видимый фокус при нажатии (состояние :active) 
+- это естественное поведение браузера и обходить это не нужно, это нарушает доступность.*/
+
+.search-form__checkbox:focus {
+  outline: none; /*Сбрасываем обводку у элемента инпут.*/
+}
+
+.search-form__checkbox:focus-visible {
+  outline: none; /*Сбрасываем обводку у элемента инпут.*/
+}
+
+.search-form__label:has(:focus-visible) {
+  /*Задаём обводку элементу лэйбл, если у дочерних элементов*/
+  outline: 1px solid #fff; /*сработал псевдо-класс :focus-visible (при нажатии на Tab).*/
+  outline-offset: 0.8px; /*Подгоняем согласно макету с инпользованием PerfectPixel.*/
+}
+
+.search-form__textfield {
+  appearance: none; /*Сбросим внешний вид элемента для всех браузеров. И ниже напишем свои.*/
+  font-family: "Fira Sans Condensed", sans-serif; /*Дублируем стили, так как они не наследуются в input.*/
+  font-weight: 400;
+  font-size: 18px;
+  background-color: #1b1919;
+  line-height: 100%; /*Задаём стили текста в соответствии с макетом.*/
+  letter-spacing: 0;
+  border-top: 1px solid #fff; /*Задаём стили рамки в соответствии с макетом.*/
+  border-right: 0;
+  border-bottom: 1px solid #fff;
+  border-left: 0;
+  color: #fff; /*Устанавливаем цвет шрифта для текста при вводе.*/
+  height: 100%; /*Подгоняем согласно макету с иcпользованием PerfectPixel. По макету была 22px.*/
+  width: 225px; /*Задаём ширину согласно макету.*/
+  padding: 2.5px 12px 2.5px 0; /*Задаём внутренние отступы согласно макету. Уменьшен правый отступ с 14px.*/
+}
+
+.search-form__textfield::placeholder {
+  color: rgb(255 255 255 / 0.7); /*Устанавливаем цвет текста для подсказки.*/
+}
+
+.search-form__checkbox-list {
+  display: flex; /*Размещаем чекбоксы в линию.*/
+  gap: 15px; /*Задаём отступ между чекбоксами согласно макету.*/
+}
+
+.search-form__pseudo-checkbox {
+  height: 19px; /*Задаём оформление для псевдочекбокса согласно макету.*/
+  width: 19px;
+  border: 1px solid #fff;
+  padding: 1px; /*Задаём для создания отступа между границей и внутренним закрашенным элементом.*/
+}
+
+.search-form__pseudo-checkbox::after {
+  content: ""; /*Добавляем свойство content, так как без него псевдоэлемент отображаться не будет.*/
+  display: block; /*Добавляем внутренний закрашенный элемент.*/
+  height: 100%; /*Обеспечиваем гибкость закрашенного квадрата, который*/
+  width: 100%; /*будет автоматически подстраиваться под размер псевдочекбокса.*/
+  background-color: #fff;
+  opacity: 0; /*Скрываем закрашенный квадрат, делая его полностью прозрачным.*/
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1; /*Отключаем стиль непрозразности квадрата у псевдочекбокса, когда выбран*/
+} /*основной чекбокс (его вид скрыт классом .visually-hidden, но активность задаёт он).*/
+
+.search-form__label:hover .search-form__label-text {
+  /*Задаём подчеркивание текста чекбокса при наведении*/
+  text-decoration: underline solid #fff 0; /*на лэйбл (text-decoration-thickness: 0) согласно макету.*/
+  text-underline-offset: 2.8px;
+  text-decoration-skip-ink: none; /*Рисуем линию под текстом сквозь глифы.*/
+}
+
+.search-form__submit-button {
+  width: 194px; /*Задаём индивидуальные стили кнопке согласно макету.*/
+  align-self: flex-end; /*Задаём положение в конце контейнера по вертикальной оси.*/
+}
+
+/*Секция content__details*/
+
+.content__details {
+  display: flex;
+  flex-direction: column;
+  gap: 26px; /*Задаём отступ между заголовком и контейнером карточек согласно макету.*/
+  height: 100%; /*Растягиваем элемент на всю доступную высоту контейнера .content. Вариант 2: align-self: stretch;*/
+  width: 100%; /*Растягиваем элемент на всю доступную ширину контейнера .content. Вариант 2: flex-grow: 1;*/
+}
+
+.title {
+  width: fit-content;
+  height: 210px; /*Задаём высоту заголовка согласно макету.*/
+  font-family: Oswald, sans-serif; /*Задаём стили текста в соответствии с макетом.*/
+  font-weight: 700;
+  font-size: 75px;
+  line-height: 96%; /*Подгоняем согласно макету с иcпользованием PerfectPixel. По макету былo 94%.*/
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.content__accent {
+  color: rgb(
+    255 255 255 / 0.25
+  ); /*Задаём rgb c альфа-каналом, цвет 25% + прозрачность 75%.*/
+}
+
+.content__list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /*Задаём отступ между последней карточкой и кнопкой согласно макету.*/
+  height: 298px; /*Устанавливаем жёсткую высоту по макету.*/
+  overflow: auto; /*Включаем скролл, если случилось переполнение.*/
+  position: relative; /*Спозиционировали элемент относительно, чтобы абсолютно спозиционированные прелоадеры встали в них.*/
+}
+
+.content__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /*Задаём отступ между карточками согласно макету.*/
+}
+
+.content__list-item {
+  /*Задаем отступы, чтобы обводка фокуса не прилипала к краям согласно макету.*/
+  padding: 1px 3px 0 2px;
+}
+
+.content__card-link {
+  display: block; /*Делаем ссылку блочной, чтобы отображать фоновый цвет первой карточки/активной.*/
+  text-decoration: none; /*Убираем дефолтное подчеркивание.*/
+  color: #fff; /*Меняем цвет текста у ссылки.*/
+  cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
+}
+
+.content__card-link_current {
+  /*При загрузке страницы скрипт JS добавляет данный класс первой карточке.*/
+  background-color: #545050; /*Карточка получает фон, далее фон переходит к активной карточке.*/
+}
+
+.content__card-link:active {
+  /*Добавляем фон при удержании кнопки мыши на карточке.*/
+  background-color: #545050;
+}
+
+.content__card-link:hover .content__video-card-title {
+  /*Задаём подчеркивание заголовка карточки*/
+  text-decoration: underline solid #fff 1px; /*при наведении согласно макету.*/
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+}
+
+.content__card-link:hover .content__video-card-description {
+  /*Задаём подчеркивание текста карточки*/
+  text-decoration: underline solid #fff 0; /*при наведении согласно макету.*/
+  text-underline-offset: 2px;
+  text-decoration-skip-ink: none;
+}
+
+.content__card-link:focus {
+  /*Сбрасываем фокус карточки при нажатии мышью.*/
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  /*Задаём фокус карточки при нажатии Tab.*/
+  outline: 1px solid #fff;
+  outline-offset: 0;
+}
+
+.content__video-card {
+  display: flex; /*Распологаем внутри карточки текст и картинку в одну строку.*/
+  align-items: start; /*Прижимаем содержимое карточки к верху контейнера.*/
+}
+
+.content__video-card-description-container {
+  width: 196px; /*Устанавливаем жёсткую ширину по макету для родителя заголовка карточки.*/
+  /*flex-grow: 1; Растягиваем элемент на всю доступную ширину контейнера, не занятую картинкой.*/
+  height: 100%;
+}
+
+.content__video-card-title {
+  font-family: Oswald, sans-serif; /*Задаём стили текста в соответствии с макетом.*/
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%; /*задаём стили согласно макету.*/
+  letter-spacing: 0;
+  text-transform: uppercase;
+  overflow: hidden; /*Скрываем текст при переполнении контейнера (у родителя обязательно жёсткая ширина)*/
+  text-overflow: ellipsis; /*Задаём многоточие при переполнении.*/
+  padding-bottom: 6px;
+}
+
+.content__video-card-description {
+  line-height: 16.2px; /*Задаём стили текста в соответствии с макетом.*/
+  letter-spacing: 0;
+  -webkit-line-clamp: 4; /*Свойство line-clamp позволяет ограничить текст заданным числом строк.*/
+  display: -webkit-box; /*Работает только в комбинации с display: -webkit-box*/
+  -webkit-box-orient: vertical; /*и -webkit-box-orient: vertical.*/
+  overflow: hidden; /*Также необходимо overflow: hidden, иначе содержимое не будет обрезано.*/
+  padding-bottom: 6px;
+}
+
+.content__video-card-thumbnail {
+  height: 103px; /*Задаём высоту для img согласно макету.*/
+  min-width: 194px; /*Задаём минимальную ширину для img согласно макету.*/
+  object-fit: cover; /*Задаём для красивой адаптации картинки под размеры любого экрана.*/
+  object-position: center; /*Выравниваем картинку согласно макету.*/
+}
+
+.more-button {
+  /*Задаём индивидуальные стили кнопке согласно макету.*/
+  width: 98.8%; /*Задаём ширину так, чтобы кнопка растягивалась на всю ширину контейнера.*/
+  align-self: center; /*Подгоняем согласно макету с иcпользованием PerfectPixel.*/
+  margin-bottom: 2px; /*Подгоняем согласно макету с иcпользованием PerfectPixel.*/
 }
