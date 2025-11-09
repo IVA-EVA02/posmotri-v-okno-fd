@@ -59,21 +59,21 @@ ol {
   display: flex; /*Создаём лейаут на странице.*/
   align-items: end; /*Прижимаем элементы к низу .content по вертикали.*/
   width: 1140px; /*Задаём ширину согласно макету.*/
-  /*height: 534px; Задаём высоту согласно макету.*/
+  min-height: 534px; /*Задаём высоту согласно макету.*/
   gap: 30px; /*Задаём отступ между элементами согласно макету.*/
 }
 
 /*Общие стили кнопок*/
 
 .button {
-  font-family: "Fira Sans Condensed", sans-serif; /*Задаём стили (не наследуются) согласно макету.*/
+  font-family: inherit; /*Задаём наследование шрифта, автоматически не наследует кнопка.*/
   font-weight: 700;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 100%;
   letter-spacing: 0;
   text-align: center;
-  border: 1px solid #fff;
-  color: #fff;
+  border: 1px solid currentColor; /*Наследуем текущий цвет от свойства color в page.*/
+  color: currentColor; /*Наследуем текущий цвет от свойства color в page.*/
   background-color: transparent;
   cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
   min-height: 34px; /*Обязательно задаём min на высоту иначе кнопка не влезает в контейнер со скроллом.*/
@@ -81,7 +81,7 @@ ol {
 
 .button:hover {
   /*Задаём подчеркивание текста кнопки при наведении согласно макету.*/
-  text-decoration: underline solid #fff 0;
+  text-decoration: underline solid currentColor 0; /*Наследуем текущий цвет от свойства color в page.*/
   text-underline-offset: 2.8px;
   text-decoration-skip-ink: none; /*Рисуем линию под текстом сквозь глифы.*/
 }
@@ -98,7 +98,7 @@ ol {
 
 .button:focus-visible {
   /*Задаём фокус у кнопки при нажатии Tab.*/
-  outline: 1px solid #fff;
+  outline: 1px solid currentColor; /*Наследуем текущий цвет от свойства color в page.*/
   outline-offset: 1px;
 }
 
@@ -141,13 +141,14 @@ ol {
 }
 
 .search-form__fieldset-title {
+  font-family: inherit; /*Задаём наследование шрифта, пропишем явно в класс.*/
   font-weight: 400; /*Задаём стили текста в соответствии с макетом.*/
-  font-size: 18px;
+  font-size: inherit;
   line-height: 1.2; /*Подгоняем согласно макету с инпользованием PerfectPixel.*/
   letter-spacing: 0;
   margin-bottom: 5px; /*Задаём отступ между названием поля и инпутом согласно макету.*/
   width: 100%;
-  height: 22px; /*Задаём высоту согласно макету.*/
+  min-height: 22px; /*Задаём высоту согласно макету. ИСПРАВЛЕНО с жёсткой высоты.*/
 }
 
 .search-form__label {
@@ -180,23 +181,23 @@ ol {
 
 .search-form__label:has(:focus-visible) {
   /*Задаём обводку элементу лэйбл, если у дочерних элементов*/
-  outline: 1px solid #fff; /*сработал псевдо-класс :focus-visible (при нажатии на Tab).*/
+  outline: 1px solid currentColor; /*сработал псевдо-класс :focus-visible (при нажатии на Tab).*/
   outline-offset: 0.8px; /*Подгоняем согласно макету с инпользованием PerfectPixel.*/
 }
 
 .search-form__textfield {
   appearance: none; /*Сбросим внешний вид элемента для всех браузеров. И ниже напишем свои.*/
-  font-family: "Fira Sans Condensed", sans-serif; /*Дублируем стили, так как они не наследуются в input.*/
+  font-family: inherit; /*Задаём наследование шрифта, автоматически не наследуется в input.*/
   font-weight: 400;
-  font-size: 18px;
-  background-color: #1b1919;
+  font-size: inherit;
+  background-color: transparent; /*Используем для прозрачного фона ВСЕГДА transparent вместо конкретного цвета.*/
   line-height: 100%; /*Задаём стили текста в соответствии с макетом.*/
   letter-spacing: 0;
-  border-top: 1px solid #fff; /*Задаём стили рамки в соответствии с макетом.*/
+  border-top: 1px solid currentColor; /*Задаём стили рамки в соответствии с макетом.*/
   border-right: 0;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid currentColor;
   border-left: 0;
-  color: #fff; /*Устанавливаем цвет шрифта для текста при вводе.*/
+  color: currentColor; /*Устанавливаем цвет шрифта для текста при вводе.*/
   height: 100%; /*Подгоняем согласно макету с иcпользованием PerfectPixel. По макету была 22px.*/
   width: 225px; /*Задаём ширину согласно макету.*/
   padding: 2.5px 12px 2.5px 0; /*Задаём внутренние отступы согласно макету. Уменьшен правый отступ с 14px.*/
@@ -214,7 +215,7 @@ ol {
 .search-form__pseudo-checkbox {
   height: 19px; /*Задаём оформление для псевдочекбокса согласно макету.*/
   width: 19px;
-  border: 1px solid #fff;
+  border: 1px solid currentColor;
   padding: 1px; /*Задаём для создания отступа между границей и внутренним закрашенным элементом.*/
 }
 
@@ -223,7 +224,7 @@ ol {
   display: block; /*Добавляем внутренний закрашенный элемент.*/
   height: 100%; /*Обеспечиваем гибкость закрашенного квадрата, который*/
   width: 100%; /*будет автоматически подстраиваться под размер псевдочекбокса.*/
-  background-color: #fff;
+  background-color: currentColor;
   opacity: 0; /*Скрываем закрашенный квадрат, делая его полностью прозрачным.*/
 }
 
@@ -233,7 +234,7 @@ ol {
 
 .search-form__label:hover .search-form__label-text {
   /*Задаём подчеркивание текста чекбокса при наведении*/
-  text-decoration: underline solid #fff 0; /*на лэйбл (text-decoration-thickness: 0) согласно макету.*/
+  text-decoration: underline solid currentColor 0; /*на лэйбл (text-decoration-thickness: 0) согласно макету.*/
   text-underline-offset: 2.8px;
   text-decoration-skip-ink: none; /*Рисуем линию под текстом сквозь глифы.*/
 }
@@ -248,18 +249,18 @@ ol {
 .content__details {
   display: flex;
   flex-direction: column;
-  gap: 26px; /*Задаём отступ между заголовком и контейнером карточек согласно макету.*/
+  gap: 21px; /*Подгоняем отступ между заголовком и контейнером карточек 21px. По макету было 26px.*/
   height: 100%; /*Растягиваем элемент на всю доступную высоту контейнера .content. Вариант 2: align-self: stretch;*/
   width: 100%; /*Растягиваем элемент на всю доступную ширину контейнера .content. Вариант 2: flex-grow: 1;*/
 }
 
 .title {
   width: fit-content;
-  height: 210px; /*Задаём высоту заголовка согласно макету.*/
+  min-height: 210px; /*Задаём высоту заголовка согласно макету. ИСПРАВЛЕНА жёсткая высота для текста.*/
   font-family: Oswald, sans-serif; /*Задаём стили текста в соответствии с макетом.*/
   font-weight: 700;
   font-size: 75px;
-  line-height: 96%; /*Подгоняем согласно макету с иcпользованием PerfectPixel. По макету былo 94%.*/
+  line-height: 94%; /*Задаём стиль согласно макету.*/
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -293,7 +294,7 @@ ol {
 .content__card-link {
   display: block; /*Делаем ссылку блочной, чтобы отображать фоновый цвет первой карточки/активной.*/
   text-decoration: none; /*Убираем дефолтное подчеркивание.*/
-  color: #fff; /*Меняем цвет текста у ссылки.*/
+  color: currentColor; /*Меняем цвет текста у ссылки.*/
   cursor: pointer; /*Устанавливаем курсор в виде руки на кликабельные элементы.*/
 }
 
@@ -309,14 +310,14 @@ ol {
 
 .content__card-link:hover .content__video-card-title {
   /*Задаём подчеркивание заголовка карточки*/
-  text-decoration: underline solid #fff 1px; /*при наведении согласно макету.*/
+  text-decoration: underline solid currentColor 1px; /*при наведении согласно макету.*/
   text-underline-offset: 4px;
   text-decoration-skip-ink: none;
 }
 
 .content__card-link:hover .content__video-card-description {
   /*Задаём подчеркивание текста карточки*/
-  text-decoration: underline solid #fff 0; /*при наведении согласно макету.*/
+  text-decoration: underline solid currentColor 0; /*при наведении согласно макету.*/
   text-underline-offset: 2px;
   text-decoration-skip-ink: none;
 }
@@ -328,7 +329,7 @@ ol {
 
 .content__card-link:focus-visible {
   /*Задаём фокус карточки при нажатии Tab.*/
-  outline: 1px solid #fff;
+  outline: 1px solid currentColor;
   outline-offset: 0;
 }
 
